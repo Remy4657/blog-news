@@ -1,10 +1,22 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+
 import styles from "./loginPage.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
+  // const { status } = useSession();
+
+  // if (status === "loading") {
+  //   return <div className={styles.loading}>Loading...</div>;
+  // }
+
+  // if (status === "authenticated") {
+  //   router.push("/admin");
+  // }
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -12,16 +24,18 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("fdds");
+    alert("me");
     // setError("");
 
     // if (!username.trim() || !password) {
     //   setError("Vui lòng nhập username và password.");
     //   return;
     // }
-    router.push("/admin");
+    // router.push("/admin");
 
     // TODO: gọi API đăng nhập ở đây (fetch / axios)
-    console.log("submit", { username, password });
+    //  console.log("submit", { username, password });
     // ví dụ redirect hoặc xử lý token...
   };
 
@@ -30,7 +44,11 @@ export default function LoginPage() {
       <div className={styles.card}>
         <h1 className={styles.title}>Đăng nhập</h1>
 
-        <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <form
+          className={styles.form}
+          onSubmit={(e) => handleSubmit(e)}
+          noValidate
+        >
           <label className={styles.label}>
             Username
             <input

@@ -13,9 +13,10 @@ const LoginPage = () => {
   }
 
   if (status === "authenticated") {
-    router.push("/")
+    // when press login button -> change status variable -> redirect homepage
+    router.push("/");
   }
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

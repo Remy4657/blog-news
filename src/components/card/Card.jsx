@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
@@ -17,12 +18,15 @@ const Card = ({ key, item }) => {
           </span>
           <span className={styles.category}>{item.catSlug}</span>
         </div>
-        <Link href={`/posts/${item.slug}`}>
+        <Link href={`/${item.slug}`}>
           <h1>{item.title}</h1>
         </Link>
         {/* <p className={styles.desc}>{item.desc.substring(0, 60)}</p> */}
-        <div className={styles.desc} dangerouslySetInnerHTML={{ __html: item?.desc.substring(0,60) }}/>
-        <Link href={`/posts/${item.slug}`} className={styles.link}>
+        <div
+          className={styles.desc}
+          dangerouslySetInnerHTML={{ __html: item?.desc.substring(0, 60) }}
+        />
+        <Link href={`/${item.slug}`} className={styles.link}>
           Read More
         </Link>
       </div>
