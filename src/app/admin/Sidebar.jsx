@@ -23,9 +23,7 @@ const drawerWidth = 240;
 export default function PermanentDrawerLeft({ children }) {
   const router = useRouter();
   const handleLogout = (e) => {
-    e.preventDefault();
-    alert("me");
-    router.push("/login-admin");
+    router.push("/admin/login-admin");
   };
   return (
     <Box sx={{ display: "flex" }}>

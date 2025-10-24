@@ -24,15 +24,14 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("fdds");
-    alert("me");
+
     // setError("");
 
     // if (!username.trim() || !password) {
     //   setError("Vui lòng nhập username và password.");
     //   return;
     // }
-    // router.push("/admin");
+    router.push("/admin");
 
     // TODO: gọi API đăng nhập ở đây (fetch / axios)
     //  console.log("submit", { username, password });
