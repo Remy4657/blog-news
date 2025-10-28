@@ -9,11 +9,11 @@ export const GET = async (req) => {
 
   const page = searchParams.get("page");
   const cat = searchParams.get("cat");
-  console.log("cat: ", cat, "page: ", page)
+  console.log("cat: ", cat, "page: ", page);
   const POST_PER_PAGE = 2;
-  if ((!page && !cat)) {
+  if (page == "null" || cat == "null") {
     try {
-      console.log("zo day")
+      console.log("zo day");
       const posts = await prisma.post.findMany({
         where: {
           ...(cat && { catSlug: cat }),

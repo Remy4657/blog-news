@@ -51,14 +51,24 @@ const rows = [
 ];
 
 export default function ListPost() {
-  const getAllPosts = async () => {
-    const { posts, count } = await getPost(null, undefined);
-    return posts;
-  };
-  const data = getAllPosts();
-  console.log("data: ", data);
+  const [listPost, setListPost] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  React.useEffect(() => {
+    const getAllPosts = async () => {
+      const { posts } = await getPost(null, null);
+      const newPosts = posts.map((post) => ({
+        title: post.title,
+        image: post.img,
+        description: post.desc,
+        category: post.catSlug,
+      }));
+      setListPost(newPosts);
+    };
+
+    getAllPosts();
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -87,7 +97,7 @@ export default function ListPost() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {listPost
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -111,7 +121,7 @@ export default function ListPost() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={listPost.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
