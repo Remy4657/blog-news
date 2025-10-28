@@ -9,8 +9,28 @@ export const GET = async (req) => {
 
   const page = searchParams.get("page");
   const cat = searchParams.get("cat");
-
+  console.log("cat: ", cat, "page: ", page)
   const POST_PER_PAGE = 2;
+  if ((!page && !cat)) {
+    try {
+      console.log("zo day")
+      const posts = await prisma.post.findMany({
+        where: {
+          ...(cat && { catSlug: cat }),
+        },
+      });
+
+      return new NextResponse(JSON.stringify({ posts, count: posts.length }), {
+        status: 200,
+      });
+    } catch (err) {
+      console.log(err);
+      return new NextResponse(
+        JSON.stringify({ message: "Something went wrong!" }),
+        { status: 500 }
+      );
+    }
+  }
 
   const query = {
     take: POST_PER_PAGE,
