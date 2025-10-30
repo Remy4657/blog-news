@@ -1,3 +1,14 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.flex_7 {
+  flex-basis: 70%;
+}
+.flex_3 {
+  flex-basis: 20%;
+}
 .infoContainer {
   display: flex;
   align-items: center;
@@ -88,7 +99,7 @@
     font-size: 36px;
   }
 
-  .description p{
+  .description p {
     font-size: 18px;
   }
 }
