@@ -11,14 +11,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { getDetailPost, getCategories } from "@/services/admin";
-import { updateDetailPost } from "@/services/admin";
+import { getCategories, createPost } from "@/services/admin";
 
 const SinglePage = ({ params }) => {
   const router = useRouter();
   const { slug } = params;
   const [contentDetail, setContentDetail] = React.useState({
-    id: "",
     title: "",
     desc: "",
     imgUrl: "",
@@ -27,32 +25,23 @@ const SinglePage = ({ params }) => {
   const [listCategory, setListCategory] = React.useState([]);
   const [valueCategory, setValueCategory] = React.useState("");
   useEffect(() => {
-    const fetchDetailPost = async () => {
-      const data = await getDetailPost(slug);
-      setContentDetail({
-        id: data.id,
-        title: data.title,
-        desc: data.desc,
-        imgUrl: data.img,
-        catSlug: data.catSlug,
-      });
-      setValueCategory(data.catSlug);
-    };
     const fetchAllCategory = async () => {
       const data = await getCategories();
       setListCategory(data);
+      console.log("list category: ", data);
     };
-    fetchDetailPost();
     fetchAllCategory();
   }, []);
   const handleSubmit = async () => {
-    await updateDetailPost({
+    console.log("create contentDetail: ", contentDetail);
+    await createPost({
       ...contentDetail,
     });
     router.push("/admin");
   };
   const onChangeDetailPost = (e, fieldName) => {
     setContentDetail({ ...contentDetail, [fieldName]: e.target.value });
+    console.log(e.target.value);
   };
   const handleChangeCategory = (event) => {
     setValueCategory(event.target.value);
@@ -73,7 +62,7 @@ const SinglePage = ({ params }) => {
             margin: "auto",
           }}
         >
-          <h1>Detail page</h1>
+          <h1>Add page</h1>
           <Box>
             <IconButton color="primary">
               <KeyboardBackspaceIcon

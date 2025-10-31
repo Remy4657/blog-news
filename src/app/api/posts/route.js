@@ -55,26 +55,65 @@ export const GET = async (req) => {
 };
 
 // CREATE A POST
+// export const POST = async (req) => {
+//   const session = await getAuthSession();
+
+//   if (!session) {
+//     return new NextResponse(
+//       JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
+//     );
+//   }
+
+//   try {
+//     const body = await req.json();
+//     const post = await prisma.post.create({
+//       data: { ...body, userEmail: session.user.email },
+//     });
+
+//     return new NextResponse(JSON.stringify(post, { status: 200 }));
+//   } catch (err) {
+//     console.log(err);
+//     return new NextResponse(
+//       JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+//     );
+//   }
+// };
 export const POST = async (req) => {
-  const session = await getAuthSession();
-
-  if (!session) {
-    return new NextResponse(
-      JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
-    );
-  }
-
   try {
     const body = await req.json();
-    const post = await prisma.post.create({
-      data: { ...body, userEmail: session.user.email },
+    const { title, desc, imgUrl, catSlug, slug } = body;
+    console.log("body: ", body);
+    // Kiểm tra slug có trùng không
+    const existingPost = await prisma.post.findUnique({
+      where: { slug },
     });
 
-    return new NextResponse(JSON.stringify(post, { status: 200 }));
+    if (existingPost) {
+      return NextResponse.json(
+        { message: "Slug already exists" },
+        { status: 400 }
+      );
+    }
+
+    // Tạo mới post
+    const newPost = await prisma.post.create({
+      data: {
+        title,
+        desc,
+        img: imgUrl,
+        //catSlug,
+        slug,
+        cat: { connect: { slug: catSlug } },
+        user: { connect: { email: "admin@gmail.com" } },
+      },
+    });
+
+    return NextResponse.json(newPost, { status: 201 });
   } catch (err) {
-    console.log(err);
-    return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+    console.error("Error creating post:", err);
+    return NextResponse.json(
+      { message: "Error creating post" },
+      { status: 500 }
     );
   }
 };
