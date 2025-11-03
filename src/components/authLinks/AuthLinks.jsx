@@ -3,11 +3,13 @@ import Link from "next/link";
 import styles from "./authLinks.module.css";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import UserMenu from "../userMenu/UserMenu";
 
 const AuthLinks = () => {
   const [open, setOpen] = useState(false);
 
-  const { status } = useSession();
+  const { data: session, status } = useSession();
+  console.log("session navbar:  ", session);
 
   return (
     <>
@@ -20,9 +22,10 @@ const AuthLinks = () => {
           <Link href="/write" className={styles.link}>
             Write
           </Link>
-          <span className={styles.link} onClick={signOut}>
+          {/* <span className={styles.link} onClick={signOut}>
             Logout
-          </span>
+          </span> */}
+          <UserMenu />
         </>
       )}
       <div className={styles.burger} onClick={() => setOpen(!open)}>

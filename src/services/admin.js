@@ -39,7 +39,6 @@ export async function getDetailPost(slug) {
   return res.json();
 }
 export async function updateDetailPost(updatedData) {
-  console.log("updatedData: ", updatedData);
   const slug = toSlug(updatedData.title);
 
   const res = await fetch(
@@ -58,7 +57,6 @@ export async function updateDetailPost(updatedData) {
   return res.json();
 }
 export async function createPost(createData) {
-  console.log("create Data: ", createData);
   const slug = toSlug(createData.title);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
@@ -67,6 +65,19 @@ export async function createPost(createData) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ ...createData, slug: slug }), // dữ liệu cần update
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Failed to update post");
+  return res.json();
+}
+export async function deletePost(id) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }), // dữ liệu cần update
     cache: "no-store",
   });
 

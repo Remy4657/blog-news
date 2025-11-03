@@ -65,9 +65,15 @@ export default function PermanentDrawerLeft({ children }) {
         <Toolbar />
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Home", "Categories"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                onClick={() => {
+                  if (text === "Home") router.push("/admin");
+                  else if (text === "Categories")
+                    router.push("/admin/category");
+                }}
+              >
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>

@@ -7,4 +7,3 @@ export const toSlug = (str) => {
     strict: true, // loại bỏ ký tự đặc biệt
   });
 };
-console.log(toSlug("vẻ đẹp")); // 👉 "ve-dep"

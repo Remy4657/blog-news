@@ -28,12 +28,10 @@ const SinglePage = ({ params }) => {
     const fetchAllCategory = async () => {
       const data = await getCategories();
       setListCategory(data);
-      console.log("list category: ", data);
     };
     fetchAllCategory();
   }, []);
   const handleSubmit = async () => {
-    console.log("create contentDetail: ", contentDetail);
     await createPost({
       ...contentDetail,
     });
@@ -41,7 +39,6 @@ const SinglePage = ({ params }) => {
   };
   const onChangeDetailPost = (e, fieldName) => {
     setContentDetail({ ...contentDetail, [fieldName]: e.target.value });
-    console.log(e.target.value);
   };
   const handleChangeCategory = (event) => {
     setValueCategory(event.target.value);
@@ -64,12 +61,13 @@ const SinglePage = ({ params }) => {
         >
           <h1>Add page</h1>
           <Box>
-            <IconButton color="primary">
-              <KeyboardBackspaceIcon
-                onClick={() => {
-                  router.push(`/admin`);
-                }}
-              />
+            <IconButton
+              color="primary"
+              onClick={() => {
+                router.push(`/admin`);
+              }}
+            >
+              <KeyboardBackspaceIcon />
             </IconButton>
           </Box>
 

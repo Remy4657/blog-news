@@ -3,17 +3,14 @@ import prisma from "@/utils/connect";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
-  console.log("post no slug");
-
   const { searchParams } = new URL(req.url);
 
   const page = searchParams.get("page");
   const cat = searchParams.get("cat");
-  console.log("cat: ", cat, "page: ", page);
   const POST_PER_PAGE = 2;
+  // get all post
   if (page == "null" || cat == "null") {
     try {
-      console.log("zo day");
       const posts = await prisma.post.findMany({
         where: {
           ...(cat && { catSlug: cat }),
@@ -42,7 +39,7 @@ export const GET = async (req) => {
 
   try {
     const [posts, count] = await prisma.$transaction([
-      prisma.post.findMany(query),
+      prisma.post.findMany(),
       prisma.post.count({ where: query.where }),
     ]);
     return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
@@ -101,10 +98,11 @@ export const POST = async (req) => {
         title,
         desc,
         img: imgUrl,
-        //catSlug,
+        catSlug,
         slug,
-        cat: { connect: { slug: catSlug } },
-        user: { connect: { email: "admin@gmail.com" } },
+        userEmail: "trongdatga@gmail.com",
+        //cat: { connect: { slug: catSlug } },
+        //user: { connect: { email: "admin@gmail.com" } },
       },
     });
 
@@ -117,3 +115,34 @@ export const POST = async (req) => {
     );
   }
 };
+export async function DELETE(req) {
+  const body = await req.json();
+
+  const { id } = body;
+  try {
+    // Kiểm tra post tồn tại
+    const existingPost = await prisma.post.findUnique({
+      where: { id },
+    });
+
+    if (!existingPost) {
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+    }
+
+    // Xóa post
+    await prisma.post.delete({
+      where: { id },
+    });
+
+    return NextResponse.json(
+      { message: "Post deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    return NextResponse.json(
+      { message: "Failed to delete post", error: error.message },
+      { status: 500 }
+    );
+  }
+}

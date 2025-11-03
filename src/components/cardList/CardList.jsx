@@ -6,7 +6,6 @@ import Card from "../card/Card";
 import { getPost } from "@/services/admin";
 
 const CardList = async ({ page, cat }) => {
-  console.log("[CardList] page, cat: ", page, cat);
   const { posts, count } = await getPost(page, cat);
 
   const POST_PER_PAGE = 2;
@@ -17,12 +16,12 @@ const CardList = async ({ page, cat }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Recent Posts</h1>
-      <div className={styles.posts}>
+      <div>
         {posts?.map((item) => (
           <Card item={item} key={item._id} />
         ))}
       </div>
-      <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
+      {/* <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} /> */}
     </div>
   );
 };

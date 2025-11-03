@@ -75,12 +75,13 @@ const SinglePage = ({ params }) => {
         >
           <h1>Detail page</h1>
           <Box>
-            <IconButton color="primary">
-              <KeyboardBackspaceIcon
-                onClick={() => {
-                  router.push(`/admin`);
-                }}
-              />
+            <IconButton
+              color="primary"
+              onClick={() => {
+                router.push(`/admin`);
+              }}
+            >
+              <KeyboardBackspaceIcon />
             </IconButton>
           </Box>
 
