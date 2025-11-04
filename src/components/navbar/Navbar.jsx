@@ -18,13 +18,13 @@ const Navbar = () => {
       <div className={styles.links}>
         <ThemeToggle />
         <Link href="/" className={styles.link}>
-          Homepage
+          TRANG CHỦ
         </Link>
         <Link href="/" className={styles.link}>
-          Contact
+          VĂN HÓA
         </Link>
         <Link href="/" className={styles.link}>
-          About
+          VIDEO
         </Link>
         <AuthLinks />
       </div>

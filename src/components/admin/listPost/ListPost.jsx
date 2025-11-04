@@ -136,7 +136,16 @@ export default function ListPost() {
                         return (
                           <>
                             {" "}
-                            <TableCell key={column.id} align={column.align}>
+                            <TableCell
+                              key={column.id}
+                              align={column.align}
+                              sx={{
+                                maxWidth: 200, // or whatever width you want
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
+                            >
                               {column.format && typeof value === "number"
                                 ? column.format(value)
                                 : value}
@@ -152,7 +161,7 @@ export default function ListPost() {
                         <IconButton
                           color="primary"
                           onClick={() => {
-                            router.push(`/admin/${row.slug}`);
+                            router.push(`/admin/detail-post/${row.slug}`);
                           }}
                         >
                           <EditIcon />

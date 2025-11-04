@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { useRouter } from "next/navigation";
-
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,6 +21,13 @@ import MailIcon from "@mui/icons-material/Mail";
 const drawerWidth = 240;
 
 export default function PermanentDrawerLeft({ children }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/me", { credentials: "include" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => setUser(data));
+  }, []);
   const router = useRouter();
   const handleLogout = (e) => {
     router.push("/admin/login-admin");
@@ -39,7 +46,7 @@ export default function PermanentDrawerLeft({ children }) {
             component="div"
             sx={{ justifyContent: "flex-end" }}
           >
-            Username
+            {user?.name}
           </Typography>
           <Button
             variant="outlined"

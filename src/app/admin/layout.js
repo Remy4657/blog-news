@@ -1,4 +1,3 @@
-"use client";
 import { Inter } from "next/font/google";
 import NavbarWrapper from "@/app/admin/NavbarWrapper";
 

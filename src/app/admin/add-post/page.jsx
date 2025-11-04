@@ -9,6 +9,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { getCategories, createPost } from "@/services/admin";
@@ -39,6 +41,9 @@ const SinglePage = ({ params }) => {
   };
   const onChangeDetailPost = (e, fieldName) => {
     setContentDetail({ ...contentDetail, [fieldName]: e.target.value });
+  };
+  const onChangeDescPost = (value, fieldName) => {
+    setContentDetail({ ...contentDetail, [fieldName]: value });
   };
   const handleChangeCategory = (event) => {
     setValueCategory(event.target.value);
@@ -102,13 +107,18 @@ const SinglePage = ({ params }) => {
               ))}
             </Select>
           </FormControl>
-          <TextareaAutosize
+          {/* <TextareaAutosize
             aria-label="minimum height"
             minRows={6}
             placeholder="Description..."
             style={{ width: "100%" }}
             value={contentDetail.desc}
             onChange={(e) => onChangeDetailPost(e, "desc")}
+          /> */}
+          <SimpleMDE
+            placeholder="Description..."
+            value={contentDetail.desc}
+            onChange={(value) => onChangeDescPost(value, "desc")}
           />
           <Button
             variant="outlined"

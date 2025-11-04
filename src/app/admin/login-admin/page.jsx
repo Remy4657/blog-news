@@ -22,20 +22,26 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    // setError("");
+    if (!username.trim() || !password) {
+      setError("Vui lòng nhập username và password.");
+      return;
+    }
+    const res = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: username, password }),
+    });
+    const data = await res.json();
 
-    // if (!username.trim() || !password) {
-    //   setError("Vui lòng nhập username và password.");
-    //   return;
-    // }
-    router.push("/admin");
-
-    // TODO: gọi API đăng nhập ở đây (fetch / axios)
-    //  console.log("submit", { username, password });
-    // ví dụ redirect hoặc xử lý token...
+    if (res.ok) {
+      router.push("/admin");
+    } else {
+      alert(data.message);
+    }
   };
 
   return (

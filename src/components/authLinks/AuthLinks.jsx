@@ -9,7 +9,6 @@ const AuthLinks = () => {
   const [open, setOpen] = useState(false);
 
   const { data: session, status } = useSession();
-  console.log("session navbar:  ", session);
 
   return (
     <>
@@ -19,13 +18,11 @@ const AuthLinks = () => {
         </Link>
       ) : (
         <>
-          <Link href="/write" className={styles.link}>
+          {/* <Link href="/write" className={styles.link}>
             Write
-          </Link>
-          {/* <span className={styles.link} onClick={signOut}>
-            Logout
-          </span> */}
-          <UserMenu />
+          </Link> */}
+
+          <UserMenu session={session} />
         </>
       )}
       <div className={styles.burger} onClick={() => setOpen(!open)}>
@@ -35,14 +32,14 @@ const AuthLinks = () => {
       </div>
       {open && (
         <div className={styles.responsiveMenu}>
-          <Link href="/">Homepage</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
-          {status === "notauthenticated" ? (
+          <Link href="/">TRANG CHỦ</Link>
+          <Link href="/">VĂN HÓA</Link>
+          <Link href="/">VIDEO</Link>
+          {status === "unauthenticated" ? (
             <Link href="/login">Login</Link>
           ) : (
             <>
-              <Link href="/write">Write</Link>
+              {/* <Link href="/write">Write</Link> */}
               <span className={styles.link}>Logout</span>
             </>
           )}

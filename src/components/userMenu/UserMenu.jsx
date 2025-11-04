@@ -15,8 +15,8 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
-export default function AccountMenu() {
-  const { data: session, status } = useSession();
+export default function AccountMenu({ session }) {
+  //const { data: session } = useSession();
   console.log("session: ", session);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
