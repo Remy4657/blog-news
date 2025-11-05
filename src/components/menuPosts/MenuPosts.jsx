@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import styles from "./menuPosts.module.css"
+import styles from "./menuPosts.module.css";
 
 const MenuPosts = ({ withImage }) => {
   return (
@@ -9,7 +9,13 @@ const MenuPosts = ({ withImage }) => {
       <Link href="/" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+            <Image
+              src="/p1.jpeg"
+              alt=""
+              fill
+              className={styles.image}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         )}
         <div className={styles.textContainer}>
@@ -26,7 +32,13 @@ const MenuPosts = ({ withImage }) => {
       <Link href="/" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+            <Image
+              src="/p1.jpeg"
+              alt=""
+              fill
+              className={styles.image}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         )}
         <div className={styles.textContainer}>
@@ -45,7 +57,13 @@ const MenuPosts = ({ withImage }) => {
       <Link href="/" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+            <Image
+              src="/p1.jpeg"
+              alt=""
+              fill
+              className={styles.image}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         )}
         <div className={styles.textContainer}>
@@ -62,7 +80,13 @@ const MenuPosts = ({ withImage }) => {
       <Link href="/" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+            <Image
+              src="/p1.jpeg"
+              alt=""
+              fill
+              className={styles.image}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         )}
         <div className={styles.textContainer}>

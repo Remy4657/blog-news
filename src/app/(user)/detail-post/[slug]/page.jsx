@@ -31,7 +31,13 @@ const SinglePage = ({ params }) => {
         <div className={styles.infoContainer}>
           {data?.img && (
             <div className={styles.imageContainer}>
-              <Image src={data?.img} alt="" fill className={styles.image} />
+              <Image
+                src={data?.img}
+                alt=""
+                fill
+                className={styles.image}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           )}
         </div>
