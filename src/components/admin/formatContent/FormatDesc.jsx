@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 // @ts-nocheck
 import remarkGfm from "remark-gfm";
 
-const SinglePage = async ({ desc }) => {
+const FormatContent = async ({ desc }) => {
   return (
     <>
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{desc}</ReactMarkdown>
@@ -13,4 +13,4 @@ const SinglePage = async ({ desc }) => {
   );
 };
 
-export default SinglePage;
+export default FormatContent;

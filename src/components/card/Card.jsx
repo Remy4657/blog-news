@@ -18,15 +18,15 @@ const Card = ({ key, item }) => {
           </span>
           <span className={styles.category}>{item.catSlug}</span>
         </div>
-        <Link href={`/${item.slug}`}>
-          <h1>{item.title}</h1>
+        <Link href={`/detail-post/${item.slug}`}>
+          <h3>{item.title}</h3>
         </Link>
         {/* <p className={styles.desc}>{item.desc.substring(0, 60)}</p> */}
         <div
           className={styles.desc}
           dangerouslySetInnerHTML={{ __html: item?.desc.substring(0, 60) }}
         />
-        <Link href={`/${item.slug}`} className={styles.link}>
+        <Link href={`/detail-post/${item.slug}`} className={styles.link}>
           Read More
         </Link>
       </div>

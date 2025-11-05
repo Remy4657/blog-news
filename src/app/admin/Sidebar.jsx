@@ -29,7 +29,10 @@ export default function PermanentDrawerLeft({ children }) {
       .then((data) => setUser(data));
   }, []);
   const router = useRouter();
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
+    await fetch("/api/admin-logout", {
+      method: "POST",
+    });
     router.push("/admin/login-admin");
   };
   return (

@@ -2,6 +2,8 @@
 import Menu from "@/components/Menu/Menu";
 import styles from "./singlePage.module.css";
 import Image from "next/image";
+import "github-markdown-css/github-markdown.css";
+import rehypeRaw from "rehype-raw";
 // @ts-nocheck
 import ReactMarkdown from "react-markdown";
 // @ts-nocheck
@@ -10,9 +12,9 @@ import Comments from "@/components/comments/Comments";
 import { getDetailPost } from "@/services/admin";
 import { useState, useEffect } from "react";
 
-const SinglePage = async ({ params }) => {
+const SinglePage = ({ params }) => {
   const { slug } = params;
-  const [data, setData] = useState(null);
+  const [data, setData] = useState("");
   //const data = await getDetailPost(slug);
   useEffect(() => {
     const fetchData = async () => {
@@ -39,9 +41,12 @@ const SinglePage = async ({ params }) => {
               className={styles.description}
               dangerouslySetInnerHTML={{ __html: data?.desc }}
             /> */}
-            {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+            >
               {data?.desc}
-            </ReactMarkdown> */}
+            </ReactMarkdown>
             <div className={styles.comment}>
               <Comments postSlug={slug} />
             </div>
