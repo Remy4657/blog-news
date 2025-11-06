@@ -7,7 +7,7 @@ export default function PermanentDrawerLeft({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavbarWrapper children={children} />
+        <NavbarWrapper>{children}</NavbarWrapper>
       </body>
     </html>
   );

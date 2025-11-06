@@ -22,7 +22,7 @@ const SinglePage = ({ params }) => {
       setData(res);
     };
     fetchData();
-  }, []);
+  }, [slug]);
 
   return (
     <div className={styles.flex}>

@@ -134,23 +134,20 @@ export default function ListPost() {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <>
-                            {" "}
-                            <TableCell
-                              key={column.id}
-                              align={column.align}
-                              sx={{
-                                maxWidth: 200, // or whatever width you want
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                            >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          </>
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={{
+                              maxWidth: 200, // or whatever width you want
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {column.format && typeof value === "number"
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
                         );
                       })}
                       <TableCell

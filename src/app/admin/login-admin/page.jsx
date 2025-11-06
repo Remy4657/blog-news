@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { signIn, useSession } from "next-auth/react";
 
 import styles from "./loginPage.module.css";
 

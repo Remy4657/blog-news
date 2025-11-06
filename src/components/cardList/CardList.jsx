@@ -7,7 +7,6 @@ import { getPost } from "@/services/admin";
 
 const CardList = async ({ page, cat }) => {
   const { posts, count } = await getPost(page, cat);
-
   const POST_PER_PAGE = 2;
 
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;
@@ -18,7 +17,7 @@ const CardList = async ({ page, cat }) => {
       <h1 className={styles.title}>Recent Posts</h1>
       <div>
         {posts?.map((item) => (
-          <Card item={item} key={item._id} />
+          <Card item={item} key={item.id} />
         ))}
       </div>
       {/* <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} /> */}

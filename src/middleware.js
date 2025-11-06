@@ -1,6 +1,4 @@
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { signIn, useSession } from "next-auth/react";
 
 export default async function middleware(req) {
   try {

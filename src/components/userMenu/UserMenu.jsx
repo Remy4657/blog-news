@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -38,7 +38,9 @@ export default function AccountMenu({ session }) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar src={session?.user?.image} />
+            <MenuItem>
+              <Avatar src={session?.user?.image} />
+            </MenuItem>
           </IconButton>
         </Tooltip>
       </Box>
