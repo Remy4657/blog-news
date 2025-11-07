@@ -108,7 +108,7 @@ export default function ListPost() {
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow>
+              {/* <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -118,7 +118,7 @@ export default function ListPost() {
                     {column.label}
                   </TableCell>
                 ))}
-              </TableRow>
+              </TableRow> */}
             </TableHead>
             <TableBody>
               {listPost

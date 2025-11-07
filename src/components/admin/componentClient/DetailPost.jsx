@@ -3,20 +3,22 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import SimpleMDE from "react-simplemde-editor";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { getCategories, createPost } from "@/services/admin";
+import { getDetailPost, getCategories } from "@/services/admin";
+import { updateDetailPost } from "@/services/admin";
 
-const SinglePage = () => {
+const DetaiPost = async ({ slug }) => {
   const router = useRouter();
   const [contentDetail, setContentDetail] = React.useState({
+    id: "",
     title: "",
     desc: "",
     imgUrl: "",
@@ -25,14 +27,26 @@ const SinglePage = () => {
   const [listCategory, setListCategory] = React.useState([]);
   const [valueCategory, setValueCategory] = React.useState("");
   useEffect(() => {
+    const fetchDetailPost = async () => {
+      const data = await getDetailPost(slug);
+      setContentDetail({
+        id: data.id,
+        title: data.title,
+        desc: data.desc,
+        imgUrl: data.img,
+        catSlug: data.catSlug,
+      });
+      setValueCategory(data.catSlug);
+    };
     const fetchAllCategory = async () => {
       const data = await getCategories();
       setListCategory(data);
     };
+    fetchDetailPost();
     fetchAllCategory();
   }, []);
   const handleSubmit = async () => {
-    await createPost({
+    await updateDetailPost({
       ...contentDetail,
     });
     router.push("/admin");
@@ -62,7 +76,7 @@ const SinglePage = () => {
             margin: "auto",
           }}
         >
-          <h1>Add page</h1>
+          <h1>Detail page</h1>
           <Box>
             <IconButton
               color="primary"
@@ -105,14 +119,7 @@ const SinglePage = () => {
               ))}
             </Select>
           </FormControl>
-          {/* <TextareaAutosize
-            aria-label="minimum height"
-            minRows={6}
-            placeholder="Description..."
-            style={{ width: "100%" }}
-            value={contentDetail.desc}
-            onChange={(e) => onChangeDetailPost(e, "desc")}
-          /> */}
+
           <SimpleMDE
             placeholder="Description..."
             value={contentDetail.desc}
@@ -131,4 +138,4 @@ const SinglePage = () => {
   );
 };
 
-export default SinglePage;
+export default DetaiPost;

@@ -4,7 +4,7 @@ import { toSlug } from "@/utils/common";
 
 // GET SINGLE POST
 export const GET = async (req, { params }) => {
-  const { slug } = params;
+  const { slug } = await params;
   try {
     const post = await prisma.post.update({
       where: { slug },
