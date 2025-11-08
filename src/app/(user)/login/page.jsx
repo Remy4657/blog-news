@@ -2,19 +2,18 @@
 import { signIn, useSession } from "next-auth/react";
 import styles from "./loginPage.module.css";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const LoginPage = () => {
-  const { status } = useSession();
-
   const router = useRouter();
-
+  const { status } = useSession();
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
-  }
-
-  if (status === "authenticated") {
-    // when press login button -> change status variable -> redirect homepage
-    router.push("/");
   }
 
   return (

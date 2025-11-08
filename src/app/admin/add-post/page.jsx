@@ -7,8 +7,8 @@ import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import SimpleMDE from "react-simplemde-editor";
+//import Select from "@mui/material/Select";
+//import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -91,7 +91,7 @@ const SinglePage = () => {
           />
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
+            {/* <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={valueCategory}
@@ -103,7 +103,7 @@ const SinglePage = () => {
                   {item.title}
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
           {/* <TextareaAutosize
             aria-label="minimum height"
@@ -113,11 +113,11 @@ const SinglePage = () => {
             value={contentDetail.desc}
             onChange={(e) => onChangeDetailPost(e, "desc")}
           /> */}
-          <SimpleMDE
+          {/* <SimpleMDE
             placeholder="Description..."
             value={contentDetail.desc}
             onChange={(value) => onChangeDescPost(value, "desc")}
-          />
+          /> */}
           <Button
             variant="outlined"
             sx={{ width: "100px" }}

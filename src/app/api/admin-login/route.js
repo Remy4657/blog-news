@@ -1,9 +1,8 @@
-export const runtime = "nodejs";
 import { NextResponse } from "next/server";
 import prisma from "@/utils/connect";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-const SECRET_KEY = "super-secret";
+
 export const POST = async (req, res) => {
   try {
     const { email, password } = await req.json();
