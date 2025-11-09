@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -15,7 +14,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { getDetailPost, getCategories } from "@/services/admin";
 import { updateDetailPost } from "@/services/admin";
 
-const DetaiPost = async ({ slug }) => {
+const DetaiPost = ({ slug }) => {
   const router = useRouter();
   const [contentDetail, setContentDetail] = React.useState({
     id: "",
@@ -44,7 +43,7 @@ const DetaiPost = async ({ slug }) => {
     };
     fetchDetailPost();
     fetchAllCategory();
-  }, []);
+  }, [slug]);
   const handleSubmit = async () => {
     await updateDetailPost({
       ...contentDetail,

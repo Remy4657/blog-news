@@ -1,5 +1,4 @@
 import React from "react";
-
 import DetaiPost from "@/components/admin/componentClient/DetailPost";
 
 const SinglePage = async ({ params }) => {
