@@ -6,27 +6,23 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import "easymde/dist/easymde.min.css";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import IconButton from "@mui/material/IconButton";
 import dynamic from "next/dynamic";
+import "easymde/dist/easymde.min.css";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
+import "easymde/dist/easymde.min.css";
+import IconButton from "@mui/material/IconButton";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import {
-  getDetailPost,
-  getCategories,
-  updateDetailPost,
-} from "@/services/admin";
+import { getCategories, createPost } from "@/services/admin";
 
-const DetaiPost = ({ slug }) => {
+const AddPost = () => {
   const router = useRouter();
   const [contentDetail, setContentDetail] = React.useState({
-    id: "",
     title: "",
     desc: "",
     imgUrl: "",
@@ -35,26 +31,14 @@ const DetaiPost = ({ slug }) => {
   const [listCategory, setListCategory] = React.useState([]);
   const [valueCategory, setValueCategory] = React.useState("");
   useEffect(() => {
-    const fetchDetailPost = async () => {
-      const data = await getDetailPost(slug);
-      setContentDetail({
-        id: data.id,
-        title: data.title,
-        desc: data.desc,
-        imgUrl: data.img,
-        catSlug: data.catSlug,
-      });
-      setValueCategory(data.catSlug);
-    };
     const fetchAllCategory = async () => {
       const data = await getCategories();
       setListCategory(data);
     };
-    fetchDetailPost();
     fetchAllCategory();
-  }, [slug]);
+  }, []);
   const handleSubmit = async () => {
-    await updateDetailPost({
+    await createPost({
       ...contentDetail,
     });
     router.push("/admin");
@@ -84,7 +68,7 @@ const DetaiPost = ({ slug }) => {
             margin: "auto",
           }}
         >
-          <h1>Detail page</h1>
+          <h1>Add page</h1>
           <Box>
             <IconButton
               color="primary"
@@ -127,12 +111,18 @@ const DetaiPost = ({ slug }) => {
               ))}
             </Select>
           </FormControl>
-
+          {/* <TextareaAutosize
+            aria-label="minimum height"
+            minRows={6}
+            placeholder="Description..."
+            style={{ width: "100%" }}
+            value={contentDetail.desc}
+            onChange={(e) => onChangeDetailPost(e, "desc")}
+          /> */}
           <SimpleMDE
             placeholder="Description..."
             value={contentDetail.desc}
             onChange={(value) => onChangeDescPost(value, "desc")}
-            style={{ width: "800px" }}
           />
           <Button
             variant="outlined"
@@ -147,4 +137,4 @@ const DetaiPost = ({ slug }) => {
   );
 };
 
-export default DetaiPost;
+export default AddPost;
