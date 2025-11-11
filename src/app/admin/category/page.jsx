@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import Paper from "@mui/material/Paper";
@@ -19,25 +20,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
-import { getPost, deletePost } from "@/services/admin";
+import { getCategories } from "@/services/admin";
 
-const columns = [
-  { id: "title", label: "Title", minWidth: 170 },
-  { id: "image", label: "Image", minWidth: 100 },
-  {
-    id: "description",
-    label: "Description",
-    minWidth: 170,
-    align: "right",
-  },
-
-  {
-    id: "category",
-    label: "Category",
-    minWidth: 170,
-    align: "right",
-  },
-];
+const columns = [{ id: "title", label: "Name", minWidth: 100 }];
 
 export default function ListPost() {
   const router = useRouter();
@@ -46,20 +31,18 @@ export default function ListPost() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [openPopupDelete, setOpenPopupDelete] = React.useState(false);
   const [idPostDelete, setIdPostDelete] = React.useState("");
-  const getAllPosts = async () => {
-    const { posts } = await getPost(null, null);
-    const newPosts = posts.map((post) => ({
+  const getAllCategories = async () => {
+    const res = await getCategories();
+    console.log("categories: ", res);
+    const newPosts = res.map((post) => ({
       id: post.id,
       title: post.title,
-      image: post.img,
-      description: post.desc,
-      category: post.catSlug,
       slug: post.slug,
     }));
     setListPost(newPosts);
   };
   React.useEffect(() => {
-    getAllPosts();
+    getAllCategories();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -82,7 +65,7 @@ export default function ListPost() {
   // logic handle delete post
   const handleDelete = async () => {
     await deletePost(idPostDelete);
-    getAllPosts();
+    getAllCategories();
     handleClose();
   };
 
