@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
+import TextField from "@mui/material/TextField";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -22,24 +23,30 @@ import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
 import { getCategories } from "@/services/admin";
 
-const columns = [{ id: "title", label: "Name", minWidth: 100 }];
+const columns = [
+  { id: "title", label: "Name", minWidth: 100 },
+  { id: "img", label: "Image", minWidth: 100 },
+];
 
 export default function ListPost() {
   const router = useRouter();
-  const [listPost, setListPost] = React.useState([]);
+  const [listCategories, setListCategories] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [openPopupDelete, setOpenPopupDelete] = React.useState(false);
   const [idPostDelete, setIdPostDelete] = React.useState("");
+  const [idEdit, setIdEdit] = React.useState("");
+
   const getAllCategories = async () => {
     const res = await getCategories();
-    console.log("categories: ", res);
+    console.log("res: ", res);
     const newPosts = res.map((post) => ({
       id: post.id,
       title: post.title,
       slug: post.slug,
+      img: post.img,
     }));
-    setListPost(newPosts);
+    setListCategories(newPosts);
   };
   React.useEffect(() => {
     getAllCategories();
@@ -104,13 +111,14 @@ export default function ListPost() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listPost
+              {listCategories
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       {columns.map((column) => {
                         const value = row[column.id];
+                        console.log("value: ", value);
                         return (
                           <TableCell
                             key={column.id}
@@ -122,6 +130,18 @@ export default function ListPost() {
                               textOverflow: "ellipsis",
                             }}
                           >
+                            {/* <TextField
+                              id="outlined-basic"
+                              variant="outlined"
+                              value={
+                                column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value
+                              }
+                              onChange={(e) => onChangeDetailPost(e, "title")}
+                              disabled={row.id === idEdit ? false : true}
+                            /> */}
+
                             {column.format && typeof value === "number"
                               ? column.format(value)
                               : value}
@@ -136,7 +156,7 @@ export default function ListPost() {
                         <IconButton
                           color="primary"
                           onClick={() => {
-                            router.push(`/admin/detail-post/${row.slug}`);
+                            router.push(`/admin/detail-category/${row.slug}`);
                           }}
                         >
                           <EditIcon />
@@ -158,7 +178,7 @@ export default function ListPost() {
         <TablePagination
           rowsPerPageOptions={[1, 2, 10]}
           component="div"
-          count={listPost.length}
+          count={listCategories.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
