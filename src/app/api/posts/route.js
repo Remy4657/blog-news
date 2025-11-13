@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
 
-  const page = searchParams.get("page");
-  const cat = searchParams.get("cat");
+  const page = await searchParams.get("page");
+  const cat = await searchParams.get("cat");
   const POST_PER_PAGE = 2;
   // get all post
   if (page == "null" || cat == "null") {
@@ -27,10 +27,11 @@ export const GET = async (req) => {
       );
     }
   }
+  console.log("cat: ", cat, "page: ", page);
 
   const query = {
     take: POST_PER_PAGE,
-    skip: POST_PER_PAGE * (page - 1),
+    //skip: POST_PER_PAGE * (page - 1),
     where: {
       ...(cat && { catSlug: cat }),
     },

@@ -31,7 +31,7 @@ const Featured = () => {
             sinh. Ngày nay, Phật giáo vẫn giữ vai trò quan trọng trong việc nuôi
             dưỡng tâm hồn và xây dựng một xã hội an hòa, hạnh phúc.
           </p>
-          <button className={styles.button}>Read More</button>
+          {/* <button className={styles.button}>Read More</button> */}
         </div>
       </div>
     </div>

@@ -11,7 +11,6 @@
   justify-content: space-between;
   gap: 20px;
 }
-
 .category {
   display: flex;
   align-items: center;
@@ -23,7 +22,7 @@
   border-radius: 10px;
 }
 
-.category.style {
+.style {
   background-color: #57c4ff31;
 }
 
