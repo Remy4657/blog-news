@@ -26,7 +26,7 @@ const AddPost = () => {
     title: "",
     desc: "",
     imgUrl: "",
-    catSlug: "",
+    catId: "",
   });
   const [listCategory, setListCategory] = React.useState([]);
   const [valueCategory, setValueCategory] = React.useState("");
@@ -51,7 +51,7 @@ const AddPost = () => {
   };
   const handleChangeCategory = (event) => {
     setValueCategory(event.target.value);
-    setContentDetail({ ...contentDetail, catSlug: event.target.value });
+    setContentDetail({ ...contentDetail, catId: event.target.value });
   };
 
   return (

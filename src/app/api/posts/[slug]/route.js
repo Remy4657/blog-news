@@ -8,7 +8,7 @@ export const GET = async (req, { params }) => {
     const post = await prisma.post.update({
       where: { slug },
       data: { views: { increment: 1 } },
-      include: { user: true },
+      include: { user: true, cat: true },
     });
 
     return new NextResponse(JSON.stringify(post, { status: 200 }));
@@ -22,8 +22,8 @@ export const GET = async (req, { params }) => {
 export const PUT = async (req) => {
   try {
     const body = await req.json();
-    const { id, title, desc, imgUrl, catSlug, slug } = body;
     console.log("body: ", body);
+    const { id, title, desc, imgUrl, catId, catName, slug } = body;
     // Kiểm tra bài viết có tồn tại không
     const existingPost = await prisma.post.findUnique({
       where: { id },
@@ -39,7 +39,7 @@ export const PUT = async (req) => {
         title,
         desc,
         slug,
-        catSlug,
+        catId,
         img: imgUrl,
       },
     });

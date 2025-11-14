@@ -12,8 +12,9 @@ export const GET = async (req) => {
     try {
       const posts = await prisma.post.findMany({
         where: {
-          ...(cat && { catSlug: cat }),
+          ...(cat && { catId: cat }),
         },
+        include: { cat: true },
       });
 
       return new NextResponse(JSON.stringify({ posts, count: posts.length }), {
@@ -33,7 +34,7 @@ export const GET = async (req) => {
     take: POST_PER_PAGE,
     //skip: POST_PER_PAGE * (page - 1),
     where: {
-      ...(cat && { catSlug: cat }),
+      ...(cat && { catId: cat }),
     },
   };
 
@@ -78,7 +79,7 @@ export const GET = async (req) => {
 export const POST = async (req) => {
   try {
     const body = await req.json();
-    const { title, desc, imgUrl, catSlug, slug } = body;
+    const { title, desc, imgUrl, catId, slug } = body;
     console.log("body: ", body);
     // Kiểm tra slug có trùng không
     const existingPost = await prisma.post.findUnique({
@@ -98,10 +99,10 @@ export const POST = async (req) => {
         title,
         desc,
         img: imgUrl,
-        catSlug,
+        catId,
         slug,
         userEmail: "trongdatga@gmail.com",
-        //cat: { connect: { slug: catSlug } },
+        //cat: { connect: { slug: catId } },
         //user: { connect: { email: "admin@gmail.com" } },
       },
     });

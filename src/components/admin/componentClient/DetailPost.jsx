@@ -11,11 +11,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import IconButton from "@mui/material/IconButton";
 import dynamic from "next/dynamic";
-
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
-
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import {
   getDetailPost,
@@ -30,21 +28,23 @@ const DetaiPost = ({ slug }) => {
     title: "",
     desc: "",
     imgUrl: "",
-    catSlug: "",
+    catId: "",
   });
   const [listCategory, setListCategory] = React.useState([]);
   const [valueCategory, setValueCategory] = React.useState("");
   useEffect(() => {
     const fetchDetailPost = async () => {
       const data = await getDetailPost(slug);
+      console.log("data: ", data);
       setContentDetail({
         id: data.id,
         title: data.title,
         desc: data.desc,
         imgUrl: data.img,
-        catSlug: data.catSlug,
+        catId: data.cat.id,
+        catName: data.cat.title,
       });
-      setValueCategory(data.catSlug);
+      setValueCategory(data.cat.title);
     };
     const fetchAllCategory = async () => {
       const data = await getCategories();
@@ -65,9 +65,15 @@ const DetaiPost = ({ slug }) => {
   const onChangeDescPost = (value, fieldName) => {
     setContentDetail({ ...contentDetail, [fieldName]: value });
   };
-  const handleChangeCategory = (event) => {
-    setValueCategory(event.target.value);
-    setContentDetail({ ...contentDetail, catSlug: event.target.value });
+  const handleChangeCategory = (selected) => {
+    const catOnChanging = listCategory.find((item) => item.title == selected);
+
+    //setValueCategory(event.target.value);
+    setContentDetail({
+      ...contentDetail,
+      catName: selected,
+      catId: catOnChanging.id,
+    });
   };
 
   return (
@@ -111,14 +117,18 @@ const DetaiPost = ({ slug }) => {
             value={contentDetail.imgUrl}
             onChange={(e) => onChangeDetailPost(e, "imgUrl")}
           />
+          {contentDetail.catName ?? ""}
+          {contentDetail.catId ?? ""}
+
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
+
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={valueCategory}
+              value={contentDetail?.catName ?? ""}
               label="Category"
-              onChange={handleChangeCategory}
+              onChange={(e) => handleChangeCategory(e.target.value)}
             >
               {listCategory.map((item) => (
                 <MenuItem key={item.id} value={item.title}>

@@ -53,7 +53,7 @@ export default function ListPost() {
       title: post.title,
       image: post.img,
       description: post.desc,
-      category: post.catSlug,
+      category: post.cat.title,
       slug: post.slug,
     }));
     setListPost(newPosts);

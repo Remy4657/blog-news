@@ -10,8 +10,8 @@ export async function GET() {
       },
       take: 10, // giới hạn 10 bản ghi
       include: {
-        cat: true, // lấy thông tin category (nếu cần)
         user: true, // lấy thông tin user (nếu cần)
+        cat: true, // lấy thông tin category (nếu cần)
       },
     });
 
