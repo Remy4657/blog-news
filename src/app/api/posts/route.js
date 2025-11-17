@@ -9,6 +9,7 @@ export const GET = async (req) => {
   const POST_PER_PAGE = 2;
   // get all post
   if (page == "null" || cat == "null") {
+    console.log("zo 1")
     try {
       const posts = await prisma.post.findMany({
         where: {
@@ -28,10 +29,38 @@ export const GET = async (req) => {
       );
     }
   }
-  console.log("cat: ", cat, "page: ", page);
+  // USER: get all blog
+  console.log("zo 2")
+  if (cat != "") {
+    console.log("zo 3")
+    try {
+      const posts = await prisma.post.findMany({
+        where: {
+          cat: {
+            slug: cat,
+          },
+        },
+        include: {
+          cat: true,      // nếu muốn lấy thông tin Category kèm theo
+        },
+      });
+      return new NextResponse(JSON.stringify({ posts, count: posts.length }), {
+        status: 200,
+      });
+    } catch (error) {
+      console.log(err);
+      return new NextResponse(
+        JSON.stringify({ message: "Something went wrong!" }),
+        { status: 500 }
+      );
+    }
+
+
+  }
+
 
   const query = {
-    take: POST_PER_PAGE,
+    //take: POST_PER_PAGE,
     //skip: POST_PER_PAGE * (page - 1),
     where: {
       ...(cat && { catId: cat }),

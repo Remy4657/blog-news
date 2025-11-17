@@ -29,7 +29,6 @@ const AddPost = () => {
     catId: "",
   });
   const [listCategory, setListCategory] = React.useState([]);
-  const [valueCategory, setValueCategory] = React.useState("");
   useEffect(() => {
     const fetchAllCategory = async () => {
       const data = await getCategories();
@@ -49,9 +48,15 @@ const AddPost = () => {
   const onChangeDescPost = (value, fieldName) => {
     setContentDetail({ ...contentDetail, [fieldName]: value });
   };
-  const handleChangeCategory = (event) => {
-    setValueCategory(event.target.value);
-    setContentDetail({ ...contentDetail, catId: event.target.value });
+  const handleChangeCategory = (selected) => {
+    const catOnChanging = listCategory.find((item) => item.title == selected);
+
+    console.log("cat id: ", catOnChanging.id);
+    setContentDetail({
+      ...contentDetail,
+      catName: selected,
+      catId: catOnChanging.id,
+    });
   };
 
   return (
@@ -100,9 +105,9 @@ const AddPost = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={valueCategory}
+              value={contentDetail?.catName ?? ""}
               label="Category"
-              onChange={handleChangeCategory}
+              onChange={(e) => handleChangeCategory(e.target.value)}
             >
               {listCategory.map((item) => (
                 <MenuItem key={item.id} value={item.title}>

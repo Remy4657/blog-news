@@ -6,11 +6,12 @@ const BlogPage = async ({ searchParams }) => {
   const { pageSearchParams } = await searchParams;
   const page = parseInt(pageSearchParams) || 1;
 
-  const { cat } = searchParams;
+  const { cat } = await searchParams;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{cat} Blog</h1>
+      {/* <h1 className={styles.title}>{cat} Blog</h1> */}
+      <span>/category{cat ? `/${cat}` : ""} </span>
       <div className={styles.content}>
         <CardList page={page} cat={cat} />
         <Menu />

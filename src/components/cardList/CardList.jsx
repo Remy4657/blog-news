@@ -7,6 +7,7 @@ import { getPost } from "@/services/admin";
 
 const CardList = async ({ page, cat }) => {
   const { posts, count } = await getPost(page, cat);
+  console.log("posts list: ", posts, "count: ", count);
   const POST_PER_PAGE = 2;
 
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;

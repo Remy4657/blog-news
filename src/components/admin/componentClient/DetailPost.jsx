@@ -69,6 +69,7 @@ const DetaiPost = ({ slug }) => {
     const catOnChanging = listCategory.find((item) => item.title == selected);
 
     //setValueCategory(event.target.value);
+    console.log("cat id: ", catOnChanging.id);
     setContentDetail({
       ...contentDetail,
       catName: selected,
@@ -117,8 +118,6 @@ const DetaiPost = ({ slug }) => {
             value={contentDetail.imgUrl}
             onChange={(e) => onChangeDetailPost(e, "imgUrl")}
           />
-          {contentDetail.catName ?? ""}
-          {contentDetail.catId ?? ""}
 
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
