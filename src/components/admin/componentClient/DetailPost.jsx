@@ -35,7 +35,6 @@ const DetaiPost = ({ slug }) => {
   useEffect(() => {
     const fetchDetailPost = async () => {
       const data = await getDetailPost(slug);
-      console.log("data: ", data);
       setContentDetail({
         id: data.id,
         title: data.title,
@@ -69,7 +68,6 @@ const DetaiPost = ({ slug }) => {
     const catOnChanging = listCategory.find((item) => item.title == selected);
 
     //setValueCategory(event.target.value);
-    console.log("cat id: ", catOnChanging.id);
     setContentDetail({
       ...contentDetail,
       catName: selected,

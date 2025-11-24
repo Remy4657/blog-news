@@ -11,7 +11,6 @@ const MenuPosts = ({ withImage }) => {
   const [listTopPosts, setListTopPosts] = useState([]);
   const getTopPosts = async () => {
     const res = await getTopPost(null, null);
-    console.log("res: ", res);
     setListTopPosts(res);
   };
   React.useEffect(() => {

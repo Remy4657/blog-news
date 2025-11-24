@@ -13,7 +13,7 @@ const BlogPage = async ({ searchParams }) => {
       {/* <h1 className={styles.title}>{cat} Blog</h1> */}
       <span>/category{cat ? `/${cat}` : ""} </span>
       <div className={styles.content}>
-        <CardList page={page} cat={cat} />
+        <CardList cat={cat} />
         <Menu />
       </div>
     </div>

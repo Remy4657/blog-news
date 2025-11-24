@@ -51,7 +51,6 @@ const AddPost = () => {
   const handleChangeCategory = (selected) => {
     const catOnChanging = listCategory.find((item) => item.title == selected);
 
-    console.log("cat id: ", catOnChanging.id);
     setContentDetail({
       ...contentDetail,
       catName: selected,
