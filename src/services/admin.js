@@ -1,10 +1,8 @@
 import { toSlug } from "@/utils/common";
 
-export const getPost = async (page, cat) => {
+export const getPost = async (cat, limit, offset) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?page=${page}&cat=${
-      cat || ""
-    }`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?cat=${cat || ""}&limit=${limit}&offset=${offset}`,
     {
       cache: "no-store",
     }

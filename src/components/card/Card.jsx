@@ -4,9 +4,9 @@ import styles from "./card.module.css";
 import Link from "next/link";
 import { formatDate } from "@/utils/common";
 
-const Card = ({ key, item }) => {
+const Card = ({ item }) => {
   return (
-    <div className={styles.container} key={key}>
+    <div className={styles.container}>
       {item.img && (
         <div className={styles.imageContainer}>
           <Image

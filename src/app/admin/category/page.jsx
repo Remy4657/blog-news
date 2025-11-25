@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
-import TextField from "@mui/material/TextField";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -35,11 +34,9 @@ export default function ListPost() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [openPopupDelete, setOpenPopupDelete] = React.useState(false);
   const [idPostDelete, setIdPostDelete] = React.useState("");
-  const [idEdit, setIdEdit] = React.useState("");
 
   const getAllCategories = async () => {
     const res = await getCategories();
-    console.log("res: ", res);
     const newPosts = res.map((post) => ({
       id: post.id,
       title: post.title,
@@ -118,7 +115,6 @@ export default function ListPost() {
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       {columns.map((column) => {
                         const value = row[column.id];
-                        console.log("value: ", value);
                         return (
                           <TableCell
                             key={column.id}

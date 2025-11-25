@@ -47,7 +47,7 @@ export default function ListPost() {
   const [openPopupDelete, setOpenPopupDelete] = React.useState(false);
   const [idPostDelete, setIdPostDelete] = React.useState("");
   const getAllPosts = async () => {
-    const { posts } = await getPost(null, null);
+    const { posts } = await getPost(null, "", "");
     const newPosts = posts.map((post) => ({
       id: post.id,
       title: post.title,

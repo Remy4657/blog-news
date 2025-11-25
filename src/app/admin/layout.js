@@ -3,7 +3,7 @@ import NavbarWrapper from "@/app/admin/NavbarWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function PermanentDrawerLeft({ children }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.className} mdl-js`}>
       <body>

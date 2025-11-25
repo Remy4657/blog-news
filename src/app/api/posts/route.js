@@ -3,37 +3,48 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
-  const page = await searchParams.get("page");
-  const cat = await searchParams.get("cat");
-  const POST_PER_PAGE = 2;
-  // ADMIN: get all post
-  console.log("cat route: ", cat);
-  if (page == "null" || cat == "null") {
-    console.log("zo 1");
-    try {
-      const posts = await prisma.post.findMany({
-        where: {
-          ...(cat && { catId: cat }),
-        },
-        include: { cat: true },
-      });
 
-      return new NextResponse(JSON.stringify({ posts, count: posts.length }), {
-        status: 200,
-      });
+  const cat = await searchParams.get("cat");
+  const limit = await Number(searchParams.get("limit"));
+  const offset = await Number(searchParams.get("offset"));
+
+  console.log("cat: ", cat);
+  console.log("limit: ", limit);
+  console.log("offset: ", offset);
+  if (limit === 0) {
+    console.log("nan");
+    const query = {
+      where: {
+        ...(cat && { catId: cat }),
+      },
+    };
+
+    try {
+      const [posts, count] = await prisma.$transaction([
+        prisma.post.findMany({
+          where: query.where,
+          include: { cat: true },
+        }),
+
+        prisma.post.count({ where: query.where }),
+      ]);
+      return new NextResponse(
+        JSON.stringify({ posts, count }, { status: 200 })
+      );
     } catch (err) {
       console.log(err);
       return new NextResponse(
-        JSON.stringify({ message: "Something went wrong!" }),
-        { status: 500 }
+        JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
       );
     }
   }
-  // USER: get all blog
+
   if (cat != "") {
-    console.log("zo 3");
+    console.log("have cat");
     try {
       const posts = await prisma.post.findMany({
+        skip: offset,
+        take: limit,
         where: {
           cat: {
             slug: cat,
@@ -43,9 +54,16 @@ export const GET = async (req) => {
           cat: true, // nếu muốn lấy thông tin Category kèm theo
         },
       });
-      return new NextResponse(JSON.stringify({ posts, count: posts.length }), {
-        status: 200,
-      });
+      return new NextResponse(
+        JSON.stringify({
+          posts,
+          count: posts.length,
+          hasMore: offset + limit < posts.length,
+        }),
+        {
+          status: 200,
+        }
+      );
     } catch (error) {
       console.log(err);
       return new NextResponse(
@@ -54,11 +72,10 @@ export const GET = async (req) => {
       );
     }
   }
-  // USER: GET BLOG BY CATEGORY
-  console.log("zo 2");
+
+  // USER: get all blog
+  console.log("don't cat");
   const query = {
-    //take: POST_PER_PAGE,
-    //skip: POST_PER_PAGE * (page - 1),
     where: {
       ...(cat && { catId: cat }),
     },
@@ -66,10 +83,21 @@ export const GET = async (req) => {
 
   try {
     const [posts, count] = await prisma.$transaction([
-      prisma.post.findMany(),
+      prisma.post.findMany({
+        skip: offset,
+        take: limit,
+        where: query.where,
+        include: { cat: true },
+      }),
+
       prisma.post.count({ where: query.where }),
     ]);
-    return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
+    return new NextResponse(
+      JSON.stringify(
+        { posts, count, hasMore: offset + limit < count },
+        { status: 200 }
+      )
+    );
   } catch (err) {
     console.log(err);
     return new NextResponse(
