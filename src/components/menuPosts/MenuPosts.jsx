@@ -11,6 +11,7 @@ const MenuPosts = ({ withImage }) => {
   const [listTopPosts, setListTopPosts] = useState([]);
   const getTopPosts = async () => {
     const res = await getTopPost(null, null);
+    console.log("res: ", res);
     setListTopPosts(res);
   };
   React.useEffect(() => {
@@ -38,7 +39,7 @@ const MenuPosts = ({ withImage }) => {
             )}
             <div className={styles.textContainer}>
               <span className={`${styles.category} ${styles.travel}`}>
-                Travel
+                {item.cat.title}
               </span>
               <h3 className={styles.postTitle}>{item.title}</h3>
               <div className={styles.detail}>

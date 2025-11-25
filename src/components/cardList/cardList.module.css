@@ -1,7 +1,21 @@
-.container{
-  flex:5
+.container {
+  flex: 5;
 }
 
-.title{
+.title {
   margin: 50px 0px;
+}
+.button {
+  padding: 16px 20px;
+  border: none;
+  border-radius: 5px;
+  width: max-content;
+  cursor: pointer;
+  margin: auto;
+}
+.flex {
+  display: flex;
+}
+.margin_auto {
+  margin: auto;
 }

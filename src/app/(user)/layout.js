@@ -8,14 +8,14 @@ import AuthProvider from "@/providers/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Lama Dev Blog App",
+  title: "BuddhaLife",
   description: "The best blog app!",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.className} mdl-js`}>
-      <body >
+      <body>
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>

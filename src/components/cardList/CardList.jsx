@@ -51,8 +51,12 @@ const CardList = ({ cat }) => {
         {listPost?.map((item) => (
           <Card item={item} key={item.id} />
         ))}
-        <div>
-          {isHasMore && <button onClick={handleShowMore}>Show more</button>}
+        <div className={`${styles.flex}`}>
+          {isHasMore && (
+            <button className={styles.button} onClick={handleShowMore}>
+              Show more
+            </button>
+          )}
         </div>
       </div>
       {/* <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} /> */}

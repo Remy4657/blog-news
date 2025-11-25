@@ -9,22 +9,22 @@ const MenuCategories = () => {
         href="/blog?cat=style"
         className={`${styles.categoryItem} ${styles.style}`}
       >
-        Style
+        Truyện ngắn
       </Link>
       <Link href="/blog" className={`${styles.categoryItem} ${styles.fashion}`}>
-        Fashion
+        Lời phật dạy
       </Link>
       <Link href="/blog" className={`${styles.categoryItem} ${styles.food}`}>
-        Food
+        Phật pháp nhiệm màu
       </Link>
       <Link href="/blog" className={`${styles.categoryItem} ${styles.travel}`}>
-        Travel
+        Góc quán niệm
       </Link>
       <Link href="/blog" className={`${styles.categoryItem} ${styles.culture}`}>
-        Culture
+        Thức tỉnh
       </Link>
       <Link href="/blog" className={`${styles.categoryItem} ${styles.coding}`}>
-        Coding
+        Sống an vui
       </Link>
     </div>
   );
