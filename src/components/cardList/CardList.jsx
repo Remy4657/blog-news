@@ -6,6 +6,7 @@ import Card from "../card/Card";
 import { getPost } from "@/services/admin";
 
 const CardList = async ({ page, cat }) => {
+  console.log("page: ", page, "cat: ", cat);
   const { posts, count } = await getPost(page, cat);
   console.log("posts list: ", posts, "count: ", count);
   const POST_PER_PAGE = 2;

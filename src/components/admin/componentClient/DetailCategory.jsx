@@ -11,13 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import {
-  getDetailPost,
-  getCategories,
-  updateDetailPost,
-  getDetailCategory,
-  updateDetailCategory,
-} from "@/services/admin";
+import { getDetailCategory, updateDetailCategory } from "@/services/admin";
 
 const DetaiPost = ({ slug }) => {
   const router = useRouter();

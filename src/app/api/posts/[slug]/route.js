@@ -22,8 +22,7 @@ export const GET = async (req, { params }) => {
 export const PUT = async (req) => {
   try {
     const body = await req.json();
-    console.log("body: ", body);
-    const { id, title, desc, imgUrl, catId, catName, slug } = body;
+    const { id, title, desc, imgUrl, catId, slug } = body;
     // Kiểm tra bài viết có tồn tại không
     const existingPost = await prisma.post.findUnique({
       where: { id },

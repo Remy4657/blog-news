@@ -35,14 +35,12 @@ const DetaiPost = ({ slug }) => {
   useEffect(() => {
     const fetchDetailPost = async () => {
       const data = await getDetailPost(slug);
-      console.log("data: ", data);
       setContentDetail({
         id: data.id,
         title: data.title,
         desc: data.desc,
         imgUrl: data.img,
         catId: data.cat.id,
-        catName: data.cat.title,
       });
       setValueCategory(data.cat.title);
     };
@@ -69,10 +67,8 @@ const DetaiPost = ({ slug }) => {
     const catOnChanging = listCategory.find((item) => item.title == selected);
 
     //setValueCategory(event.target.value);
-    console.log("cat id: ", catOnChanging.id);
     setContentDetail({
       ...contentDetail,
-      catName: selected,
       catId: catOnChanging.id,
     });
   };

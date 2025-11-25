@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
-
   const page = await searchParams.get("page");
   const cat = await searchParams.get("cat");
   const POST_PER_PAGE = 2;
-  // get all post
+  // ADMIN: get all post
+  console.log("cat route: ", cat);
   if (page == "null" || cat == "null") {
-    console.log("zo 1")
+    console.log("zo 1");
     try {
       const posts = await prisma.post.findMany({
         where: {
@@ -30,9 +30,8 @@ export const GET = async (req) => {
     }
   }
   // USER: get all blog
-  console.log("zo 2")
   if (cat != "") {
-    console.log("zo 3")
+    console.log("zo 3");
     try {
       const posts = await prisma.post.findMany({
         where: {
@@ -41,7 +40,7 @@ export const GET = async (req) => {
           },
         },
         include: {
-          cat: true,      // nếu muốn lấy thông tin Category kèm theo
+          cat: true, // nếu muốn lấy thông tin Category kèm theo
         },
       });
       return new NextResponse(JSON.stringify({ posts, count: posts.length }), {
@@ -54,11 +53,9 @@ export const GET = async (req) => {
         { status: 500 }
       );
     }
-
-
   }
-
-
+  // USER: GET BLOG BY CATEGORY
+  console.log("zo 2");
   const query = {
     //take: POST_PER_PAGE,
     //skip: POST_PER_PAGE * (page - 1),
