@@ -3,6 +3,8 @@ import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { getCategories } from "@/services/admin";
+import { getColorCategory } from "@/utils/common";
+
 
 const CategoryList = async () => {
   const data = await getCategories();
@@ -13,8 +15,11 @@ const CategoryList = async () => {
         {data?.map((item, index) => (
           <Link
             href={`/blog?cat=${item.slug}`}
-            className={`${styles.category} ${styles.style}`}
+            className={`${styles.category}`}
             key={item.id}
+            style={{
+              backgroundColor: `${getColorCategory(item.title)}`
+            }}
           >
             {item.img && (
               <Image

@@ -30,6 +30,7 @@
 .links {
   display: flex;
   align-items: center;
+  justify-content: end;
   gap: 20px;
   flex: 1;
   font-size: 20px;

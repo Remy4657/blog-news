@@ -3,18 +3,17 @@ import Menu from "@/components/Menu/Menu";
 import styles from "./singlePage.module.css";
 import Image from "next/image";
 import "github-markdown-css/github-markdown.css";
-import rehypeRaw from "rehype-raw";
 // @ts-nocheck
 import ReactMarkdown from "react-markdown";
 // @ts-nocheck
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import Comments from "@/components/comments/Comments";
 import { getDetailPost } from "@/services/admin";
 import { useState, useEffect } from "react";
 
 const DetailPost = ({ slug }) => {
   const [data, setData] = useState("");
-  //const data = await getDetailPost(slug);
   useEffect(() => {
     const fetchData = async () => {
       const res = await getDetailPost(slug);
@@ -42,10 +41,6 @@ const DetailPost = ({ slug }) => {
         </div>
         <div className={styles.content}>
           <div className={styles.post}>
-            {/* <div
-              className={styles.description}
-              dangerouslySetInnerHTML={{ __html: data?.desc }}
-            /> */}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}

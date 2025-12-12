@@ -3,6 +3,9 @@ import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
 import { formatDate } from "@/utils/common";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 const Card = ({ item }) => {
   return (
@@ -19,18 +22,15 @@ const Card = ({ item }) => {
         </div>
       )}
       <div className={styles.textContainer}>
-        {/* <div className={styles.detail}>
-          <span className={styles.category}>{item.catSlug}</span>
-        </div> */}
+
         <Link href={`/detail-post/${item.slug}`}>
           <h3>{item.title}</h3>
           <span className={styles.date}>{formatDate(item.createdAt)}</span>
         </Link>
-        {/* <p className={styles.desc}>{item.desc.substring(0, 60)}</p> */}
-        <div
-          className={styles.desc}
-          dangerouslySetInnerHTML={{ __html: item?.desc.substring(0, 60) }}
-        />
+
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}>{item?.desc.slice(0, 240) + "..."}</ReactMarkdown>
         <Link href={`/detail-post/${item.slug}`} className={styles.link}>
           Read More
         </Link>

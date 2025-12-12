@@ -1,32 +1,40 @@
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import styles from "./menuCategories.module.css";
+import { getCategories } from "@/services/admin";
+import { getColorCategory } from "@/utils/common";
 
-const MenuCategories = () => {
+const MenuCategories = async () => {
+  const data = await getCategories();
+
+
   return (
     <div className={styles.categoryList}>
-      <Link
-        href="/blog?cat=style"
-        className={`${styles.categoryItem} ${styles.style}`}
-      >
-        Truyện ngắn
-      </Link>
-      <Link href="/blog" className={`${styles.categoryItem} ${styles.fashion}`}>
-        Lời phật dạy
-      </Link>
-      <Link href="/blog" className={`${styles.categoryItem} ${styles.food}`}>
-        Phật pháp nhiệm màu
-      </Link>
-      <Link href="/blog" className={`${styles.categoryItem} ${styles.travel}`}>
-        Góc quán niệm
-      </Link>
-      <Link href="/blog" className={`${styles.categoryItem} ${styles.culture}`}>
-        Thức tỉnh
-      </Link>
-      <Link href="/blog" className={`${styles.categoryItem} ${styles.coding}`}>
-        Sống an vui
-      </Link>
-    </div>
+      {data?.map((item, index) => (
+        <Link
+          href={`/blog?cat=${item.slug}`}
+          className={`${styles.categoryItem}`}
+          key={item.id}
+          style={{
+            backgroundColor: `${getColorCategory(item.title)}`
+          }}
+        >
+          {item.img && (
+            <Image
+              src={item.img}
+              alt=""
+              width={32}
+              height={32}
+              className={styles.image}
+            />
+          )}
+          {item.title}
+        </Link>
+      ))
+      }
+
+    </div >
   );
 };
 

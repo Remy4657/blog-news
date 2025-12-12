@@ -10,28 +10,36 @@
   padding: 10px 25px;
   border-radius: 10px;
   font-size: 14px;
+    display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: capitalize;
+ 
 }
 
-.categoryItem.style {
+.style {
   background-color: #57c4ff31;
 }
 
-.categoryItem.fashion {
+.fashion {
   background-color: #da85c731;
 }
 
-.categoryItem.food {
+.food {
   background-color: #7fb88133;
 }
 
-.categoryItem.travel {
+.travel {
   background-color: #ff795736;
 }
 
-.categoryItem.culture {
+.culture {
   background-color: #ffb04f45;
 }
 
-.categoryItem.coding {
+.coding {
   background-color: #5e4fff31;
+}
+.image {
+  border-radius: 50%;
 }

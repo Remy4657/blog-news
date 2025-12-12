@@ -5,8 +5,6 @@ import CardList from "@/components/cardList/CardList";
 import Menu from "@/components/Menu/Menu";
 
 export default async function Home({ searchParams }) {
-  // const { page } = await searchParams;
-  // const currentPage = parseInt(page) || 1;
   return (
     <div className={styles.container}>
       <Featured />
