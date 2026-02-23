@@ -1,4 +1,3 @@
-"use client";
 import Menu from "@/components/Menu/Menu";
 import styles from "./singlePage.module.css";
 import Image from "next/image";
@@ -10,17 +9,9 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Comments from "@/components/comments/Comments";
 import { getDetailPost } from "@/services/admin";
-import { useState, useEffect } from "react";
 
-const DetailPost = ({ slug }) => {
-  const [data, setData] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getDetailPost(slug);
-      setData(res);
-    };
-    fetchData();
-  }, [slug]);
+const DetailPost = async ({ slug }) => {
+  const data = await getDetailPost(slug);
 
   return (
     <div className={styles.flex}>

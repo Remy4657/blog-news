@@ -27,8 +27,7 @@ const Footer = () => {
         <div className={styles.list}>
           <span className={styles.listTitle}>Links</span>
           <Link href="/">Trang chủ</Link>
-          <Link href="/">Văn hóa</Link>
-          <Link href="/">VIDEO</Link>
+
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Tags</span>

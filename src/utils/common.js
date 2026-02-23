@@ -25,7 +25,7 @@ export const getColorCategory = (item) => {
   if (item.toLowerCase() == "truyện ngắn") {
     return "#da85c731"
   }
-  if (item.toLowerCase() == "lời phật dạy") {
+  if (item.toLowerCase() == "thường thức") {
     return "#7fb88133"
   }
   if (item.toLowerCase() == "phật pháp nhiệm màu") {

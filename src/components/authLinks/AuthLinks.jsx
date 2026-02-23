@@ -14,7 +14,8 @@ const AuthLinks = () => {
     <>
       {status === "unauthenticated" ? (
         <Link href="/login" className={styles.link}>
-          Login
+          <UserMenu action="Login" />
+
         </Link>
       ) : (
         <>
@@ -22,7 +23,7 @@ const AuthLinks = () => {
             Write
           </Link> */}
 
-          <UserMenu session={session} />
+          <UserMenu session={session} action="Logout" />
         </>
       )}
       <div className={styles.burger} onClick={() => setOpen(!open)}>
@@ -33,8 +34,6 @@ const AuthLinks = () => {
       {open && (
         <div className={styles.responsiveMenu}>
           <Link href="/">TRANG CHỦ</Link>
-          <Link href="/">VĂN HÓA</Link>
-          <Link href="/">VIDEO</Link>
           {status === "unauthenticated" ? (
             <Link href="/login">Login</Link>
           ) : (

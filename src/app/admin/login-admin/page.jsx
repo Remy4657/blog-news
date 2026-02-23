@@ -16,8 +16,8 @@ export default function LoginPage() {
   //   router.push("/admin");
   // }
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("admin@example.com");
+  const [password, setPassword] = useState("Admin@123");
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 

@@ -21,11 +21,11 @@ const Navbar = () => {
           <Link href="/" className={styles.link}>
             TRANG CHỦ
           </Link>
-          <Link href="/" className={styles.link}>
-            VĂN HÓA
+          <Link href="/blog?cat=truyen-ngan" className={styles.link}>
+            TRUYỆN NGẮN
           </Link>
-          <Link href="/" className={styles.link}>
-            VIDEO
+          <Link href="/blog?cat=goc-quan-niem" className={styles.link}>
+            GÓC QUÁN NIỆM
           </Link>
           <AuthLinks />
         </div>
